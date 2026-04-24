@@ -1,0 +1,14 @@
+name: neo-backup-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13  # ปรับเป็น 3.13 ได้ถ้าโค้ดคุณรองรับ
+  - pip
+  - numpy        # ใส่ Library ที่โค้ดคุณเรียกใช้ (ตัวอย่าง)
+  - pandas       # ใส่ Library ที่โค้ดคุณเรียกใช้ (ตัวอย่าง)
+  - cryptography # สำคัญสำหรับแอป Backup (ใช้เข้ารหัสไฟล์)
+  - tqdm         # ไว้ทำ Progress bar สวยๆ ตอน backup
+  - pip:
+    - pytest     # เครื่องมือรัน Test
+    - flake8     # เครื่องมือเช็ค Syntax โค้ด
