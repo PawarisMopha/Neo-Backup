@@ -1,0 +1,30 @@
+name: Python Package using Conda
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Conda environment
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: '3.13'
+        environment-file: environment.yml
+        activate-environment: neo-backup-env
+        auto-activate-base: false
+    - name: Lint with flake8
+      run: |
+        # Check for errors Python
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Check for warnings
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics 
+
+    - name: Test with pytest
+      run: |
+        pytest
+        
